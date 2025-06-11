@@ -8,10 +8,10 @@ import os
 app = Flask(__name__, static_folder='frontend')  
 CORS(app)
 
+# Load model
 model = tf.keras.models.load_model("model.h5")
 
 LABELS = ['battery', 'glass', 'metal', 'organic', 'paper', 'plastic']
-
 IMG_SIZE = (224, 224)
 
 @app.route('/predict', methods=['POST'])
@@ -38,12 +38,10 @@ def predict():
 
 @app.route('/')
 def serve_index():
-    
     return send_from_directory(os.path.join(app.static_folder), 'index.html')
 
 @app.route('/<path:path>')
 def serve_static(path):
-
     return send_from_directory(os.path.join(app.static_folder), path)
 
 if __name__ == '__main__':
