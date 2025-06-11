@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./public/assets/circle.png" />
+    <title>SmartWaste - Klasifikasi Sampah AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            animation: {
+              "bounce-slow": "bounce 2s infinite",
+              "pulse-soft": "pulse 3s ease-in-out infinite",
+              float: "float 6s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50"
+  >
+    <!-- Header -->
+    <header
+      class="bg-white/80 backdrop-blur-md shadow-lg border-b border-emerald-100 sticky top-0 z-50"
+    >
+      <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img
+              src="./public/assets/circle.png"
+              alt="logo-smartwaste"
+              width="40px"
+              height="40px"
+            />
+            <div>
+              <h1 class="text-2xl font-bold text-gray-800">SmartWaste</h1>
+              <p class="text-sm text-gray-600">Klasifikasi Sampah dengan AI</p>
+            </div>
+          </div>
+          <div class="hidden md:flex items-center space-x-4">
+            <span
+              class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium"
+            >
+              AI Powered
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Content -->
+        <div class="animate-fade-in">
+          <h1
+            class="text-5xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight"
+          >
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600"
+            >
+              SmartWaste
+            </span>
+            <br />
+            <span class="text-gray-700">Solusi Pintar</span>
+          </h1>
+
+          <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+            Revolusi pengelolaan sampah dengan teknologi AI yang canggih.
+            Identifikasi jenis sampah secara otomatis dan dapatkan panduan
+            pengelolaan yang tepat untuk lingkungan yang lebih bersih.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <a href="#technology-ai">
+              <button
+                class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold rounded-xl hover:from-emerald-600 hover:to-teal-600 transform hover:scale-105 transition-all duration-200 shadow-xl"
+              >
+                <svg
+                  class="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  ></path>
+                </svg>
+                Mulai Klasifikasi
+              </button>
+            </a>
+            <button
+              class="inline-flex items-center px-8 py-4 bg-white text-gray-700 font-semibold rounded-xl border-2 border-gray-200 hover:border-emerald-300 hover:text-emerald-600 transition-all duration-200 shadow-lg"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              Pelajari Lebih Lanjut
+            </button>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-emerald-600 mb-1">95%</div>
+              <div class="text-sm text-gray-600">Akurasi</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-teal-600 mb-1">&lt;2s</div>
+              <div class="text-sm text-gray-600">Kecepatan</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-cyan-600 mb-1">5+</div>
+              <div class="text-sm text-gray-600">Jenis Sampah</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Image -->
+        <div class="animate-float">
+          <div class="relative">
+            <!-- Main illustration background -->
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-3xl transform rotate-3"
+            ></div>
+            <div
+              class="relative bg-white rounded-2xl shadow-2xl p-8 border border-gray-100"
+            >
+              <!-- Mockup smartphone/device showing waste classification -->
+              <div
+                class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 mb-4"
+              >
+                <div
+                  class="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg p-3 mb-3"
+                >
+                  <div class="text-white text-sm font-medium">
+                    📱 SmartWaste AI
+                  </div>
+                </div>
+
+                <!-- Sample waste images -->
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                  <div
+                    class="bg-blue-100 rounded-lg h-20 flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-blue-500"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div
+                    class="bg-green-100 rounded-lg h-20 flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-green-500"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Classification result -->
+                <div class="bg-emerald-50 rounded-lg p-3">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-sm font-medium text-emerald-800"
+                      >Hasil:</span
+                    >
+                    <span
+                      class="text-xs bg-emerald-200 text-emerald-800 px-2 py-1 rounded-full"
+                      >95%</span
+                    >
+                  </div>
+                  <div class="text-emerald-700 font-semibold">
+                    ♻️ Plastik - Dapat Didaur Ulang
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating elements -->
+              <div
+                class="absolute -top-4 -right-4 bg-yellow-400 rounded-full p-3 shadow-lg animate-bounce-slow"
+              >
+                <svg
+                  class="w-6 h-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+
+              <div
+                class="absolute -bottom-2 -left-2 bg-pink-400 rounded-full p-2 shadow-lg animate-pulse-soft"
+              >
+                <svg
+                  class="w-4 h-4 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center space-x-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium mb-4"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <span>Tentang SmartWaste</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          Mengapa Memilih
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600"
+          >
+            SmartWaste?
+          </span>
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Solusi cerdas untuk pengelolaan sampah yang lebih mudah, terarah, dan
+          berkelanjutan dalam mendukung kota layak huni, konsumsi bijak, dan
+          aksi lingkungan.
+        </p>
+      </div>
+
+      <!-- SDG Cards Grid -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- SDG 11 - Kota dan Komunitas Berkelanjutan -->
+        <div class="text-center">
+          <div class="mb-6">
+            <img
+              src="./public/assets/11.png"
+              alt="SDG 11 - Kota dan Komunitas Berkelanjutan"
+              class="w-32 h-32 object-cover rounded-full shadow-md mx-auto"
+            />
+          </div>
+          <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Kota dan Komunitas Berkelanjutan
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Pengelolaan sampah dilakukan dalam satu platform terintegrasi,
+              mendukung terciptanya lingkungan kota yang lebih bersih, sehat,
+              dan tertata.
+            </p>
+          </div>
+        </div>
+
+        <!-- SDG 12 - Konsumsi dan Produksi Bertanggung Jawab -->
+        <div class="text-center">
+          <div class="mb-6">
+            <img
+              src="./public/assets/12.png"
+              alt="SDG 12 - Konsumsi dan Produksi Bertanggung Jawab"
+              class="w-32 h-32 object-cover rounded-full shadow-md mx-auto"
+            />
+          </div>
+          <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Konsumsi dan Produksi Bertanggung Jawab
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Mengenali jenis sampah dengan mudah membantu proses pemilahan
+              berjalan lebih tepat, sehingga limbah berkurang dan pengelolaan
+              jadi lebih efisien.
+            </p>
+          </div>
+        </div>
+
+        <!-- SDG 13 - Penanganan Perubahan Iklim -->
+        <div class="text-center">
+          <div class="mb-6">
+            <img
+              src="./public/assets/13.png"
+              alt="SDG 13 - Penanganan Perubahan Iklim"
+              class="w-32 h-32 object-cover rounded-full shadow-md mx-auto"
+            />
+          </div>
+          <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Penanganan Perubahan Iklim
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Kemitraan dengan bank sampah dan program pemerintah memperkuat
+              kontribusi terhadap pengurangan emisi dan respons terhadap
+              perubahan iklim.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main
+      class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8"
+      id="technology-ai"
+    >
+      <!-- Hero Section -->
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center space-x-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium mb-4"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <span>Teknologi AI Terdepan</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          Klasifikasi Sampah
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600"
+          >
+            Otomatis
+          </span>
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Upload foto sampah Anda dan biarkan AI kami mengidentifikasi jenisnya
+          serta memberikan informasi lengkap tentang cara pengelolaannya.
+        </p>
+      </div>
+
+      <!-- Upload Section -->
+      <div class="grid lg:grid-cols-2 gap-8 mb-12">
+        <!-- Upload Area -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+          <h3
+            class="text-2xl font-semibold text-gray-800 mb-6 flex items-center"
+          >
+            <svg
+              class="w-6 h-6 text-emerald-500 mr-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+              ></path>
+            </svg>
+            Upload Gambar Sampah
+          </h3>
+
+          <!-- Drop Zone -->
+          <div
+            id="dropzone"
+            class="border-2 border-dashed border-emerald-300 bg-emerald-50 rounded-xl p-8 text-center hover:border-emerald-400 hover:bg-emerald-100 transition-all duration-300 cursor-pointer"
+          >
+            <div class="animate-float">
+              <svg
+                class="w-16 h-16 text-emerald-400 mx-auto mb-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-lg font-medium text-gray-700 mb-2">
+              Drag & drop gambar di sini
+            </p>
+            <p class="text-gray-500 mb-4">atau</p>
+            <label
+              for="fileInput"
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium rounded-lg hover:from-emerald-600 hover:to-teal-600 transform hover:scale-105 transition-all duration-200 cursor-pointer shadow-lg"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                ></path>
+              </svg>
+              Pilih File
+            </label>
+            <input type="file" id="fileInput" class="hidden" accept="image/*" />
+            <p class="text-xs text-gray-400 mt-3">
+              Mendukung JPG, PNG, dan WEBP (Maks. 5MB)
+            </p>
+          </div>
+
+          <!-- Preview Image -->
+          <div id="imagePreview" class="hidden mt-6">
+            <div class="relative rounded-xl overflow-hidden shadow-lg">
+              <img
+                id="previewImg"
+                class="w-full h-64 object-cover"
+                alt="Preview"
+              />
+              <button
+                id="removeImage"
+                class="absolute top-3 right-3 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-colors"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <button
+              id="classifyBtn"
+              class="w-full mt-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white py-3 px-6 rounded-lg font-medium hover:from-emerald-600 hover:to-teal-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              <svg
+                class="w-5 h-5 inline mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                ></path>
+              </svg>
+              Klasifikasi Sampah
+            </button>
+          </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+          <h3
+            class="text-2xl font-semibold text-gray-800 mb-6 flex items-center"
+          >
+            <svg
+              class="w-6 h-6 text-emerald-500 mr-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            Hasil Klasifikasi
+          </h3>
+
+          <!-- Loading State -->
+          <div id="loadingState" class="hidden text-center py-12">
+            <div
+              class="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-500 mx-auto mb-4"
+            ></div>
+            <p class="text-gray-600">Menganalisis gambar...</p>
+          </div>
+
+          <!-- Empty State -->
+          <div id="emptyState" class="text-center py-12">
+            <div class="animate-pulse-soft">
+              <svg
+                class="w-20 h-20 text-gray-300 mx-auto mb-4"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-gray-500 text-lg">
+              Upload gambar untuk melihat hasil klasifikasi
+            </p>
+          </div>
+
+          <!-- Results -->
+          <div id="results" class="hidden">
+            <div
+              class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-6 mb-6"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="text-xl font-semibold text-gray-800">
+                  Jenis Sampah:
+                </h4>
+                <span
+                  id="confidence"
+                  class="px-3 py-1 bg-emerald-500 text-white rounded-full text-sm font-medium"
+                  >95%</span
+                >
+              </div>
+              <h5
+                id="wasteType"
+                class="text-2xl font-bold text-emerald-700 mb-2"
+              >
+                Plastik
+              </h5>
+              <p id="wasteCategory" class="text-gray-600">
+                Kategori: Sampah Anorganik
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <div class="bg-blue-50 rounded-lg p-4">
+                <h6 class="font-semibold text-blue-800 mb-2 flex items-center">
+                  <svg
+                    class="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                  Deskripsi
+                </h6>
+                <p id="description" class="text-blue-700 text-sm">
+                  Plastik adalah polimer sintetis yang terbuat dari bahan
+                  petrokimia. Sampah plastik membutuhkan waktu ratusan tahun
+                  untuk terurai secara alami.
+                </p>
+              </div>
+
+              <div class="bg-green-50 rounded-lg p-4">
+                <h6 class="font-semibold text-green-800 mb-2 flex items-center">
+                  <svg
+                    class="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                  Cara Pengelolaan
+                </h6>
+                <ul
+                  id="managementTips"
+                  class="text-green-700 text-sm space-y-1"
+                >
+                  <li>• Bersihkan dari sisa makanan sebelum dibuang</li>
+                  <li>• Pisahkan berdasarkan jenis plastik (PET, HDPE, dll)</li>
+                  <li>• Kumpulkan di tempat sampah khusus plastik</li>
+                  <li>• Dapat didaur ulang menjadi produk baru</li>
+                </ul>
+              </div>
+
+              <div class="bg-yellow-50 rounded-lg p-4">
+                <h6
+                  class="font-semibold text-yellow-800 mb-2 flex items-center"
+                >
+                  <svg
+                    class="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                  Dampak Lingkungan
+                </h6>
+                <p id="environmentalImpact" class="text-yellow-700 text-sm">
+                  Plastik yang tidak dikelola dengan baik dapat mencemari laut,
+                  membahayakan kehidupan laut, dan menghasilkan mikroplastik
+                  yang berbahaya bagi rantai makanan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 text-center border border-gray-100"
+        >
+          <div
+            class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-4"
+          >
+            <svg
+              class="w-6 h-6 text-emerald-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="text-2xl font-bold text-gray-800 mb-2">95%</h4>
+          <p class="text-gray-600">Akurasi Klasifikasi</p>
+        </div>
+
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 text-center border border-gray-100"
+        >
+          <div
+            class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4"
+          >
+            <svg
+              class="w-6 h-6 text-blue-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="text-2xl font-bold text-gray-800 mb-2">&lt;2s</h4>
+          <p class="text-gray-600">Waktu Pemrosesan</p>
+        </div>
+
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 text-center border border-gray-100"
+        >
+          <div
+            class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4"
+          >
+            <svg
+              class="w-6 h-6 text-purple-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="text-2xl font-bold text-gray-800 mb-2">5+</h4>
+          <p class="text-gray-600">Jenis Sampah</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Solusi Kami Section -->
+    <section class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center space-x-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium mb-4"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fill-rule="evenodd"
+              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <span>Solusi Terdepan</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600"
+          >
+            Solusi Kami
+          </span>
+        </h2>
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div
+          class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+        >
+          <!-- Image Space -->
+          <div class="relative mb-6">
+            <img
+              src="./public/assets/individual.png"
+              alt="gatau isi apa"
+              class="w-full h-48 object-cover rounded-xl"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+              For Individuals
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Solusi daur ulang sampah rumah tangga melalui aplikasi dengan
+              sistem mudah dan ramah pengguna.
+            </p>
+            <button
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              Cari Tahu
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div
+          class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+        >
+          <!-- Image Space -->
+          <div class="relative mb-6">
+            <img
+              src="./public/assets/business.png"
+              alt="gatau isi apa"
+              class="w-full h-48 object-cover rounded-xl"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+              For Business Owners
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Layanan pengelolaan sampah berkelanjutan untuk bisnis, membantu
+              mengurangi jejak lingkungan dengan sistem yang mudah
+              diintegrasikan.
+            </p>
+            <button
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold rounded-lg hover:from-green-600 hover:to-emerald-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              Cari Tahu
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div
+          class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+        >
+          <!-- Image Space -->
+          <div class="relative mb-6">
+            <img
+              src="./public/assets/corporate.png"
+              alt="gatau isi apa"
+              class="w-full h-48 object-cover rounded-xl"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+              For Corporate Responsibility
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Membantu perusahaan memenuhi kewajiban CSR dengan melacak dan
+              mengelola sampah untuk mendukung keberlanjutan.
+            </p>
+            <button
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              Cari Tahu
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-gray-400">
+            © 2025 SmartWaste. Membantu lingkungan melalui teknologi AI.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="./public/scripts.js"></script>
+  </body>
+</html>
